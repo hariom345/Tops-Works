@@ -1,0 +1,128 @@
+i. Select unique job from EMP table
+Query- Select unique job from EMP table
+
+
+ii. List the details of the emps in asc order of the Dptnos and desc of Jobs? 
+
+Query-select * from emp order by deptno asc;
+
+
+iii. Display all the unique job groups in the descending order? 
+Query-select  distinct job from emp order by job desc;
+
+iv. List the emps who joined before 1981. 
+Query-select *from emp where year(Hiredate)<1981;
+
+
+ v. List the Empno, Ename, Sal, Daily sal of all emps in the asc order of Annsal.
+ Query-select empno,ename,sal,sal/30 as dailysal from emp order by sal asc;
+
+
+-- vi. List the Empno, Ename, Sal, Exp of all emps working for Mgr 7689. 
+ Query -  select job,empno,ename,sal,Mgr, DATEDIFF(CURDATE(), hiredate)/365 AS Experience from emp where Mgr=7698 ;
+
+
+ vii. Display all the details of the emps who’s Comm. Is more than their Sal? 
+ Query- select*from emp where comm>sal;
+
+
+
+viii. List the emps who are either ‘CLERK’ or ‘ANALYST’ in the Desc order.
+ Query-  select*from emp where job="CLERK" OR job="ANALYST" order by job desc;
+
+
+ ix. List the emps Who Annual sal ranging from 22000 and 45000. 
+Query-  select Ename,sal*12 as annualsal from emp  WHERE (sal * 12)  between 22000 and 45000;
+
+
+x. List the Enames those are starting with ‘S’ and with five characters.
+ Query- select*from emp where Ename like 's____%';
+
+
+xi. List the emps whose Empno not starting with digit78.
+ Query-  select*from emp where empno  not like '78%';
+
+
+xii. List all the Clerks of Deptno 20. 
+Query-  select* from emp where Job="Clerk"  and Deptno =20;
+
+
+ xiii. List the Emps who are senior to their own MGRS.
+Query- 
+
+-- xiv. List the Emps of Deptno 20 who’s Jobs are same as Deptno10
+ Query-  SELECT * 
+FROM EMP E1  
+WHERE E1.DEPTNO = 20  
+AND E1.JOB IN (  
+  SELECT E2.JOB  
+  FROM EMP E2  
+  WHERE E2.DEPTNO = 10  
+);
+
+
+ xv. List the Emps who’s Sal is same as FORD or SMITH in desc order of Sal.
+ Query- select * from emp where sal  IN(select sal from emp where Ename="SMITH" OR Ename="FORD");
+
+
+-- xvi. List the emps whose jobs same as SMITH or ALLEN.
+Query-  select * from emp where job In(
+select job from emp where ename="Smith" or ename="Allen");
+
+
+ xvii. Any jobs of deptno 10 those that are not found in deptno 20
+Query-  select job from  emp where deptno= 10 and job not in(
+select job from emp where deptno=20);
+
+
+ xviii. Find the highest sal of EMP table. 
+Query- select max(sal) as Highestsal from emp;
+
+
+ xix. Find details of highest paid employee. 
+Query- select*from emp where sal=
+(select max(sal) as Highestsal from emp);
+
+ xx. Find the total sal given to the MGR.
+Query- select job,sum(sal) as totalsum from emp group by job having job="Manager";
+
+
+ xxi. List the emps whose names contains ‘A’. 
+select*from emp where ename like'A%';
+
+
+--  xxii. Find all the emps who earn the minimum Salary for each job wise in ascending order
+ Query-  SELECT e1.ename, e1.sal ,e1.job 
+FROM emp e1  
+JOIN (  
+  SELECT job, MIN(sal) AS minsalary  
+  FROM emp  
+  GROUP BY job 
+) e2 ON e1.job = e2.job AND e1.sal = e2.minsalary order by sal;
+
+ xxiii. List the emps whose sal greater than Blake’s sal.
+select *from emp where sal>(
+select sal from emp where ename="Blake");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
